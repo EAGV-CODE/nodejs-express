@@ -1,0 +1,66 @@
+.thumbnail img {
+	width: 100%;
+}
+
+.thumbnail {
+	padding: 0px;
+}
+
+.thumbnail .caption-full {
+	padding: 9px;
+}
+
+.delete-form{
+	display: inline;
+}
+
+.jumbotron {
+	background-image: url("https://images.unsplash.com/photo-1444146085469-2a4ef5a7e5fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60");	
+	color: white;
+}
+
+body {
+	background-color:white;	
+}
+
+.lead {
+	Color:black;
+}
+
+.caption-full {
+	background-color:white;	
+}
+
+.well {
+	background-color:white;		
+	
+}
+
+.btn-danger {
+	background-Color:black;
+	border-color:black;
+}
+
+.btn-success {
+	background-Color:black;
+	border-color:black;
+}
+
+#fear{
+	font-size:14px;
+}
+
+.aditional {
+	text-align: center;	
+}
+
+#aditional{
+	font-weight:bold;
+}
+
+/* Google Maps */
+#map {
+	height:400px;
+	width: 100%;	
+}
+

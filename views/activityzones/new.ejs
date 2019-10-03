@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+<div class="container">
+	<div class="row">
+		<h1 style="text-align: center"> Create a new Activity Zone </h1>
+		<div style="width:30%; margin:25px auto;">
+			<form action="/activityzones" method= "POST">
+				<div class="form-group">
+					<input class="form-control" type="text" name= "name" placeholder="name">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="number" name= "fear" placeholder="fear level" min="10"   step="1">
+				</div>
+				<div class="form-group">
+				<label for="location">Location</label>
+				<input class="form-control" type="text" name= "location" id="location" placeholder="location">	
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" name= "image" placeholder="image1">	
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" name= "description" placeholder="description">	
+				</div>
+				<div class="form-group">
+					<h3 class= "aditional"> Aditional images </h3>	
+					<input class="form-control" type="text" name= "image2" placeholder="image2">	
+					<input class="form-control" type="text" name= "image3" placeholder="image3">	
+					<input class="form-control" type="text" name= "image4" placeholder="image4">	
+					<input class="form-control" type="text" name= "image5" placeholder="image5">	
+				</div>
+				<div class="form-group">
+					<button class="btn btn-lg btn-danger btn-block">Submit!!</button>	
+				</div>	
+			</form>	
+			<a style= "font-weight:bold;" class="lead" href="/activityzones">Go Back</a>
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>

@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+
+	<div class="container">
+		<header class="jumbotron">	
+			<div class="container">
+				<h1><span class="glyphicon glyphicon-alert" aria-hidden="true"></span> Welcome to Zombie Alert App!!!</h1>
+				<p>View our hand-picked activity zones from all over Berlin</p>
+				<p>
+					<a class="btn btn-danger btn-lg" href="/activityzones/new"> Add New Activity Zombie Zone</a>
+				</p>
+			</div>
+		</header>
+
+		
+		<div class= "row text-center" style="display:flex; flex-wrap: wrap;">
+			<% activityzones.forEach(function(activityzone){ %>
+				<div class= "col-md-3 col-sm-6 col-xs-12">
+					<div class="thumbnail">
+						<img src="<%=activityzone.image%>">	
+						<div class = "caption">
+							<h4><%= activityzone.name %> </h4>	
+						</div>
+						<p>
+							<a href="/activityzones/<%= activityzone._id%>" class= "btn btn-danger">More Info</a>
+						</p>
+					</div>
+				</div>
+			<% }); %>
+		</div>	
+	</div>
+		
+<% include ../partials/footer %>

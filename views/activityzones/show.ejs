@@ -1,0 +1,124 @@
+<% include ../partials/header %>
+
+
+<div class= "container">
+	<div class="row">
+		<div class="col-md-3">
+			<p class="lead">Zombie Alert App</p>
+		
+			<ul class="list-group">
+			  <li class="list-group-item">
+				<span class="badge"> <%= activityzone.comments.length %></span>
+				Number of comments
+			  </li>
+			</ul>
+			
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+				<div class="btn-group-vertical" style="width:100%; height:100%;" role="group" aria-label="images">
+					
+				<% if(activityzone.image2 != "" && activityzone.image2.trim() != "")	{%>
+					<button type="button" class="btn btn-success" style="margin-bottom: 5px;" onclick= "document.getElementById('image').src= '<%= activityzone.image2 %>'">image 2</button>
+				<% } %>
+				<% if(activityzone.image3 != "" && activityzone.image3.trim() != "")	{%>	
+					<button type="button" class="btn btn-success" style="margin-bottom: 5px;"onclick= "document.getElementById('image').src= '<%= activityzone.image3 %>'">image 3</button>
+				<% } %>
+				<% if(activityzone.image4 != "" && activityzone.image4.trim() != "")	{%>
+					<button type="button" class="btn btn-success" style="margin-bottom: 5px;"onclick= "document.getElementById('image').src= '<%= activityzone.image4 %>'">image 4</button>
+ 				<% } %>	
+				<% if(activityzone.image5 != "" && activityzone.image5.trim() != "")	{%>	
+					<button type="button" class="btn btn-success" style="margin-bottom: 5px;"onclick= "document.getElementById('image').src= '<%= activityzone.image5 %>'">image 5</button>	
+				<% } %>
+				</div>
+			</div>
+		
+			<div id="map"></div>
+			
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<img id="image" class="img-responsive" src="<%= activityzone.image %>">
+				<div class="caption-full">
+					<h4 class="pull-right"><small>Fear Level: <%=activityzone.fear %></small></h4>
+						<div class="progress">
+						  <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="<%=activityzone.fear %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=activityzone.fear %>%;">
+								<%=activityzone.fear %>
+						  </div>
+						</div>
+					<h4><a><%= activityzone.name %></a></h4>
+					<p><%= activityzone.description %></p>
+					<p>
+						<em>Submitted by <%= activityzone.author.username %>, <%= moment(activityzone.createdAt).fromNow() %></em>
+					</p>
+					<% if(currentUser && activityzone.author.id.equals(currentUser._id)){ %>
+		
+					<a class="btn  btn-xs btn-warning" href="/activityzones/<%= activityzone._id %>/edit">Edit</a>
+					<form class="delete-form" action="/activityzones/<%= activityzone._id %>?_method=DELETE" method="POST"> 
+						<button class="btn btn-xs btn-danger">Delete</button>
+					</form>
+					<% } %>
+					<a style= "font-weight:bold;" class="lead" href="/activityzones/">Go Back</a>
+				</div>
+			</div>
+			<div class="well">
+				<div class="text-right">
+					<a class="btn btn-success" href="/activityzones/<%= activityzone._id %>/comments/new">Add New Comment</a>	
+				</div>
+				<hr>
+				<% activityzone.comments.forEach(function(comment) { %>
+					<div class="row">
+						<div class="col-md-12">
+							<strong><%= comment.author.username %></strong>
+							<span class="pull-right"><%= moment(activityzone.createdAt).fromNow() %></span>
+							<p>
+								<%= comment.text %>
+							</p>
+							
+						<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+							<a class="btn btn-xs btn-warning" 
+							   href="/activityzones/<%= activityzone._id %>/comments/<%= comment._id %>/edit">
+							   Edit
+							</a>
+							<form class="delete-form" action="/activityzones/<%= activityzone._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+								<input type="submit" class="btn btn-xs btn-danger" value="Delete">
+							</form>	
+						<% } %>	
+						</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>	
+	</div>
+</div>	
+<script>
+	
+ function initMap() { 
+    var lat = <%= activityzone.lat %>;  
+    var lng = <%= activityzone.lng %>; 
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), { 
+        zoom: 8, 
+        center: center, 
+        scrollwheel: false 
+    }); 
+    var contentString = ` 
+      <strong><%= activityzone.name %><br /> 
+      <%= activityzone.location %></strong> 
+      <p><%= activityzone.description %></p> 
+    ` 
+    var infowindow = new google.maps.InfoWindow({ 
+      content: contentString 
+    }); 
+    var marker = new google.maps.Marker({ 
+        position: center, 
+        map: map 
+    }); 
+    marker.addListener('click', function() { 
+      infowindow.open(map, marker); 
+    }); 
+  } 
+</script> 
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcVNJoKd9RZcd1R7lBsW_GTEjbbwHPgFQ&callback=initMap"></script> 
+
+
+<% include ../partials/footer %>
