@@ -24,18 +24,17 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/zombie_alert");
 mongoose.connect(process.env.DATABASEURL);
-// mongodb+srv://eagv:<password>@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority//
 
+//mongoose.connect("mongodb://localhost/zombie_alert");
 //mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
-	useNewUrlParser: true,
-	useCreateIndex: true
-}).then(() => {
-	console.log('Connected to DB!');
-}).catch(err => {
-	console.log('ERROR:', err.message);
-});
+// 	useNewUrlParser: true,
+// 	useCreateIndex: true
+// }).then(() => {
+// 	console.log('Connected to DB!');
+// }).catch(err => {
+// 	console.log('ERROR:', err.message);
+// });
 
 //===================================================================
 
