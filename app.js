@@ -28,15 +28,26 @@ mongoose.set('useUnifiedTopology', true);
 
 
 
-//mongoose.connect("mongodb://localhost/zombie_alert");
-mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
-	useNewUrlParser: true,
-	useCreateIndex: true
-}).then(() => {
-	console.log('Connected to DB!');
-}).catch(err => {
-	console.log('ERROR:', err.message);
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://eagv:<password>@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
 });
+
+
+
+//mongoose.connect("mongodb://localhost/zombie_alert");
+// mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
+// 	useNewUrlParser: true,
+// 	useCreateIndex: true
+// }).then(() => {
+// 	console.log('Connected to DB!');
+// }).catch(err => {
+// 	console.log('ERROR:', err.message);
+// });
 
 //===================================================================
 
