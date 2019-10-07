@@ -1,17 +1,17 @@
 require('dotenv').config();
 
-var express 	= require("express"),
-	app 		= express(),
-	bodyParser 	= require("body-parser"),
-	mongoose 	= require("mongoose"),
-	flash		= require("connect-flash"),
-	passport	= require("passport"),
-	LocalStrategy= require("passport-local"),
-	methodOverride= require("method-override"),
-	Activityzone= require("./models/activityzone"),
-	Comment		= require("./models/comment"),
-	User		= require("./models/user"),
-	seedDB		= require("./seeds")
+var express 		= require("express"),
+	app 			= express(),
+	bodyParser 		= require("body-parser"),
+	mongoose 		= require("mongoose"),
+	flash			= require("connect-flash"),
+	passport		= require("passport"),
+	LocalStrategy	= require("passport-local"),
+	methodOverride	= require("method-override"),
+	Activityzone	= require("./models/activityzone"),
+	Comment			= require("./models/comment"),
+	User			= require("./models/user"),
+	seedDB			= require("./seeds")
 	
 
 // requiring routes=================================================
@@ -24,17 +24,19 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(process.env.DATABASEURL);
+//mongoose.connect(process.env.DATABASEURL);
+
+
 
 //mongoose.connect("mongodb://localhost/zombie_alert");
-//mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
-// 	useNewUrlParser: true,
-// 	useCreateIndex: true
-// }).then(() => {
-// 	console.log('Connected to DB!');
-// }).catch(err => {
-// 	console.log('ERROR:', err.message);
-// });
+mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
+	useNewUrlParser: true,
+	useCreateIndex: true
+}).then(() => {
+	console.log('Connected to DB!');
+}).catch(err => {
+	console.log('ERROR:', err.message);
+});
 
 //===================================================================
 
