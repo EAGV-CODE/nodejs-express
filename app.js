@@ -24,8 +24,11 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-// mongoose.connect("mongodb://localhost/....
-mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
+mongoose.connect("mongodb://localhost/zombie_alert");
+mongoose.connect(process.env.DATABASEURL);
+// mongodb+srv://eagv:<password>@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority//
+
+//mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
 	useNewUrlParser: true,
 	useCreateIndex: true
 }).then(() => {
@@ -73,6 +76,6 @@ app.use("/", indexRoutes);
 app.use("/activityzones", activityzoneRoutes);
 app.use("/activityzones/:id/comments", commentRoutes);
 
-app.listen(3000, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
 	console.log("the ZombieAlert Server has Started");
 });
