@@ -27,17 +27,24 @@ mongoose.set('useUnifiedTopology', true);
 //mongoose.connect(process.env.DATABASEURL);
 
 
+// assign mongoose promise library and connect to database
+mongoose.Promise = global.Promise;
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://eagv:<password>@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+const databaseUri = process.env.MONGODB_URI || 'mongodb://localhost/zombie_alert';
+
+mongoose.connect(databaseUri, { useMongoClient: true })
+      .then(() => console.log(`Database connected`))
+      .catch(err => console.log(`Database connection error: ${err.message}`));
 
 
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://eagv:<password>@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+// client.connect(err => {
+//   const collection = client.db("zombie_alert").collection("activityzones");
+//   // perform actions on the collection object
+//   client.close();
+// });
 
 //mongoose.connect("mongodb://localhost/zombie_alert");
 // mongoose.connect("mongodb+srv://eagv:19CHIle75@cluster0-jtoox.mongodb.net/admin?retryWrites=true&w=majority", {
